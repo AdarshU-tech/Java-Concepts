@@ -1,0 +1,133 @@
+//CONCEPTS COVERED: OOPS, Static , this, super, abstract method and class, Constructor
+//Overloading , Overriding, Interface
+class Bank {
+    
+    int personalID;
+    int deposit;
+    int interest = 5;
+    // Parameterised Constructor
+    Bank(int deposit) {
+        this.deposit = deposit;
+
+    }
+    //Belongs to class
+    // static variable
+    public static String funktion = "Prepare FD and get Interest";
+    // Static Method
+    public static void ChangeFunktion() {
+        funktion = "Changed";
+
+    }
+
+    public int getInterest() {
+
+        return interest;
+    }
+
+}
+
+class SBI extends Bank {
+    SBI(int deposit) {
+        super(deposit);
+
+    }
+
+    // Method Overrding
+    public int getInterest() {
+        return 7;
+    }
+
+}
+
+// Abstract CLass and Methods
+abstract class Online extends Bank {
+    String userID;
+
+    Online(int deposit) {
+        super(deposit);
+
+    }
+
+    public abstract double calculateTotal(int years);
+
+}
+
+// Hierarchical inheritance with Bank and SBI
+class ICICI extends Bank {
+
+    ICICI(int deposit) {
+        super(deposit);
+        // TODO Auto-generated constructor stub
+    }
+
+    public int getInterest() {
+        return 8;
+    }
+
+}
+
+// MultiLevelInhertiance
+class ICICIOnline extends Online {
+    ICICIOnline(int deposit) {
+        super(deposit);
+        
+    }
+
+    int years;
+
+    // super Keyword
+    public double calculateTotal(int years) {
+        this.years = years;
+        return (super.deposit * interest/100) + super.deposit;
+    }
+    //Method Overloading
+    public double calculateTotal(int years, boolean ind) {
+        if(ind){
+            return 0;
+        }
+        this.years = years;
+        return (super.deposit * interest/100) + super.deposit;
+    }
+
+}
+
+/*interface UPI extends Online{
+    UPI(int deposit) {
+        super(deposit);
+
+    }
+    void withdraw(int i);
+
+
+}
+
+class RazorPay implements UPI{
+    RazorPay(int deposit){
+        super(deposit);
+
+    }
+    private static int commission=500;
+    void withdraw(int i){
+
+
+    }
+
+}*/
+
+////////////////
+class Test {
+    public static void main(String args[]) {
+        Bank b = new Bank(1000);
+        System.out.println(b.funktion);
+        Bank.ChangeFunktion();
+        System.out.println(b.funktion);
+
+        Bank i = new ICICI(1000);
+        System.out.println(i.funktion);
+        ICICIOnline io=new ICICIOnline(1000);
+        ICICIOnline oi=new ICICIOnline(1000);
+        System.out.println(oi.calculateTotal(2,true));
+
+    }
+
+};
