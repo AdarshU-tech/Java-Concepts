@@ -1,0 +1,36 @@
+public class InvalidAgeException extends Exception {
+    public InvalidAgeException(String errorMessage) {
+        super(errorMessage);
+    }
+}
+public class Person {
+    private int age;
+
+    public void setAge(int age) throws InvalidAgeException {
+        if (age < 0 || age > 120) {
+            throw new InvalidAgeException("Invalid age: " + age);
+        }
+        this.age = age;
+    }
+
+
+    public static void main(String[] args) {
+        Person p = new Person();
+        try {
+            int k=1/0;
+            p.setAge(-5);
+            return;
+        }
+        
+        catch (InvalidAgeException e) {
+            System.out.println(e.getMessage()); // prints "Invalid age: -5"
+        }
+        catch (Exception e){
+            System.out.println("XYZ1");
+        }
+        finally{
+            System.out.println("XYZ");
+
+        }
+}
+}
